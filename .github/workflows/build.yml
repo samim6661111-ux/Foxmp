@@ -1,4 +1,3 @@
-
 name: FoxMP build
 on:
   workflow_dispatch:
@@ -27,6 +26,7 @@ jobs:
         run: python3 tests/test_server.py
       - name: SDK pieces
         run: |
+          export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-34" "build-tools;34.0.0" >/dev/null
           echo "ANDROID_JAR=$ANDROID_HOME/platforms/android-34/android.jar" >> $GITHUB_ENV
